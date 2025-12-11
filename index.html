@@ -403,6 +403,26 @@
             margin-bottom: 6px;
         }
 
+        .logo-circle {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid #38bdf8;
+            box-shadow: var(--shadow-soft);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #020617;
+        }
+        
+        .logo-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+
         .contact-line strong {
             color: var(--text);
         }
@@ -440,7 +460,11 @@
     <header>
         <div class="top-bar">
             <div style="display:flex;align-items:center;gap:10px;">
-                <div class="logo-initials">CA</div>
+                <div class="logo-circle">
+                  <img src="portrait-christopher.jpg"
+                       alt="Christopher J. Averty"
+                       class="logo-photo">
+                </div>
                 <div>
                     <div style="font-size:15px;font-weight:600;">Christopher J. Averty</div>
                     <div style="font-size:12px;color:var(--muted);">
@@ -452,7 +476,7 @@
             <div class="top-links">
                 <div class="chip">📍 Quebec, QC</div>
                 <div class="chip"><strong>Langues :</strong> FR · EN (en cours)</div>
-                <div class="chip"><strong>Domaine :</strong> C++, numerique, finance</div>
+                <div class="chip"><strong>Domaine :</strong> C++, SQL, numerique, finance</div>
             </div>
         </div>
 
@@ -723,7 +747,10 @@
                 </p>
                 <!-- A mettre a jour quand tu creereras ton LinkedIn -->
                 <p class="contact-line">
-                    <strong>LinkedIn :</strong> a venir
+                    <strong>LinkedIn :</strong>
+                    <a href="www.linkedin.com/in/christopher-j-averty-4bb743220" target="_blank">
+                        Christopher J. Averty
+                    </a>
                 </p>
             </div>
 
