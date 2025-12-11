@@ -4,74 +4,766 @@
     <meta charset="UTF-8">
     <title>Christopher J. Averty - Portfolio</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Portfolio de Christopher J. Averty, étudiant en génie logiciel à l'Université Laval, développeur C++ et passionné de systèmes numériques.">
+
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #0d1117;
-            color: #e6edf3;
+        :root {
+            --bg: #050816;
+            --bg-alt: #0b1020;
+            --card: #111827;
+            --accent: #38bdf8;
+            --accent-soft: rgba(56, 189, 248, 0.1);
+            --text: #e5e7eb;
+            --muted: #9ca3af;
+            --border: #1f2937;
+            --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.55);
+            --radius-lg: 18px;
+            --radius-pill: 999px;
+            --transition-fast: 0.18s ease-out;
+            --font-main: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            --font-code: "JetBrains Mono", "SF Mono", ui-monospace, Menlo, Consolas, monospace;
+        }
+
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
-        header {
-            text-align: center;
-            padding: 60px 20px;
-            background: #161b22;
-        }
-        h1 { font-size: 2.5em; margin-bottom: 10px; }
-        p.subtitle { font-size: 1.2em; color: #9ba4b0; }
 
-        section {
-            max-width: 900px;
-            margin: 40px auto;
-            background: #161b22;
-            padding: 25px;
-            border-radius: 10px;
-            border: 1px solid #30363d;
+        body {
+            font-family: var(--font-main);
+            background: radial-gradient(circle at top, #111827 0%, #020617 50%, #000 100%);
+            color: var(--text);
+            line-height: 1.6;
         }
-
-        h2 { border-bottom: 1px solid #30363d; padding-bottom: 10px; }
 
         a {
-            color: #58a6ff;
+            color: var(--accent);
             text-decoration: none;
         }
-        a:hover { text-decoration: underline; }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Layout général */
+
+        .page {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 24px 16px 64px;
+        }
+
+        header {
+            padding: 32px 0 12px;
+        }
+
+        .top-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .logo-initials {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #38bdf8, #6366f1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .top-links {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .chip {
+            padding: 6px 12px;
+            border-radius: var(--radius-pill);
+            border: 1px solid var(--border);
+            font-size: 13px;
+            color: var(--muted);
+            background-color: rgba(15, 23, 42, 0.7);
+        }
+
+        .chip strong {
+            color: var(--text);
+        }
+
+        nav {
+            margin-top: 16px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .nav-link {
+            font-size: 14px;
+            padding: 6px 14px;
+            border-radius: var(--radius-pill);
+            border: 1px solid transparent;
+            color: var(--muted);
+            cursor: pointer;
+            background: transparent;
+            transition: var(--transition-fast);
+        }
+
+        .nav-link:hover {
+            border-color: var(--accent-soft);
+            color: var(--text);
+            background-color: rgba(15, 23, 42, 0.8);
+        }
+
+        /* Hero */
+
+        .hero {
+            margin-top: 40px;
+            padding: 28px 24px 32px;
+            border-radius: 24px;
+            background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.1), transparent 50%),
+                        radial-gradient(circle at top right, rgba(129, 140, 248, 0.08), transparent 55%),
+                        #020617;
+            border: 1px solid rgba(31, 41, 55, 0.9);
+            box-shadow: var(--shadow-soft);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at top, rgba(255, 255, 255, 0.02), transparent 55%);
+            pointer-events: none;
+        }
+
+        .hero-main {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-title {
+            font-size: clamp(32px, 5vw, 40px);
+            font-weight: 800;
+            letter-spacing: 0.03em;
+        }
+
+        .hero-subtitle {
+            margin-top: 8px;
+            font-size: 15px;
+            color: var(--muted);
+        }
+
+        .hero-subtitle span {
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        .hero-tags {
+            margin-top: 18px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .tag-pill {
+            font-size: 12px;
+            padding: 4px 10px;
+            border-radius: var(--radius-pill);
+            background-color: rgba(15, 23, 42, 0.95);
+            border: 1px solid rgba(55, 65, 81, 0.9);
+            color: var(--muted);
+        }
+
+        .hero-actions {
+            margin-top: 22px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .btn-primary,
+        .btn-ghost {
+            border-radius: var(--radius-pill);
+            padding: 9px 16px;
+            font-size: 14px;
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: var(--transition-fast);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+            color: #0b1120;
+            font-weight: 600;
+            box-shadow: 0 14px 30px rgba(8, 47, 73, 0.7);
+        }
+
+        .btn-primary:hover {
+            filter: brightness(1.07);
+            transform: translateY(-1px);
+        }
+
+        .btn-ghost {
+            background-color: rgba(15, 23, 42, 0.9);
+            border-color: rgba(55, 65, 81, 0.9);
+            color: var(--text);
+        }
+
+        .btn-ghost:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-1px);
+        }
+
+        /* Sections */
+
+        section {
+            margin-top: 40px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-title span {
+            font-size: 22px;
+        }
+
+        .section-subtitle {
+            font-size: 14px;
+            color: var(--muted);
+            margin-bottom: 16px;
+        }
+
+        /* Projets */
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 16px;
+        }
+
+        .card {
+            background-color: var(--card);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            padding: 16px 18px;
+            box-shadow: 0 14px 30px rgba(15, 23, 42, 0.85);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 6px;
+        }
+
+        .card-title {
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .card-badge {
+            font-size: 11px;
+            padding: 3px 8px;
+            border-radius: var(--radius-pill);
+            background-color: var(--accent-soft);
+            color: var(--accent);
+            border: 1px solid rgba(56, 189, 248, 0.4);
+        }
+
+        .card-body {
+            font-size: 13px;
+            color: var(--muted);
+            margin-bottom: 8px;
+        }
+
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: var(--muted);
+            margin-top: 4px;
+        }
+
+        .pill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+        .pill {
+            padding: 2px 8px;
+            border-radius: var(--radius-pill);
+            background-color: rgba(15, 23, 42, 0.9);
+            border: 1px solid rgba(55, 65, 81, 0.9);
+            font-size: 11px;
+        }
+
+        /* Skills */
+
+        .skills-wrap {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 16px;
+        }
+
+        .skills-group-title {
+            font-size: 14px;
+            margin-bottom: 8px;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.09em;
+        }
+
+        .skills-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .skills-chip {
+            padding: 5px 10px;
+            border-radius: var(--radius-pill);
+            background-color: rgba(15, 23, 42, 0.9);
+            border: 1px solid rgba(55, 65, 81, 0.9);
+            font-size: 12px;
+        }
+
+        /* Timeline */
+
+        .timeline {
+            border-left: 1px dashed rgba(75, 85, 99, 0.9);
+            margin-top: 8px;
+            padding-left: 14px;
+        }
+
+        .timeline-item {
+            margin-bottom: 16px;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: -14px;
+            top: 4px;
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #38bdf8 0, #0ea5e9 60%, #020617 100%);
+            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.18);
+        }
+
+        .timeline-title {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .timeline-meta {
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .timeline-body {
+            font-size: 13px;
+            color: var(--muted);
+            margin-top: 4px;
+        }
+
+        /* Contact */
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+        }
+
+        .contact-line {
+            font-size: 14px;
+            color: var(--muted);
+            margin-bottom: 6px;
+        }
+
+        .contact-line strong {
+            color: var(--text);
+        }
+
+        footer {
+            margin-top: 40px;
+            padding-top: 18px;
+            border-top: 1px solid rgba(31, 41, 55, 0.9);
+            font-size: 12px;
+            color: var(--muted);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        /* Responsive */
+
+        @media (max-width: 640px) {
+            .hero {
+                padding: 22px 18px 26px;
+            }
+
+            .top-bar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
     </style>
 </head>
-
 <body>
+<div class="page">
 
-<header>
-    <h1>Christopher J. Averty</h1>
-    <p class="subtitle">Etudiant en genie logiciel · Developpeur C++ · Systemes numeriques</p>
-</header>
+    <!-- TOP BAR / HEADER --------------------------------------------------- -->
+    <header>
+        <div class="top-bar">
+            <div style="display:flex;align-items:center;gap:10px;">
+                <div class="logo-initials">CA</div>
+                <div>
+                    <div style="font-size:15px;font-weight:600;">Christopher J. Averty</div>
+                    <div style="font-size:12px;color:var(--muted);">
+                        B. Ing. en genie logiciel · Universite Laval
+                    </div>
+                </div>
+            </div>
 
-<section>
-    <h2>Projets scolaires</h2>
-    <ul>
-        <li><a href="#">TP3 Catalogue (C++)</a></li>
-        <li><a href="#">Simulateur Logisim</a></li>
-        <li><a href="#">Analyse numerique (MATLAB)</a></li>
-        <li><a href="#">ACP, probabilites, alg. lineaire</a></li>
-    </ul>
-</section>
+            <div class="top-links">
+                <div class="chip">📍 Quebec, QC</div>
+                <div class="chip"><strong>Langues :</strong> FR · EN (en cours)</div>
+                <div class="chip"><strong>Domaine :</strong> C++, numerique, finance</div>
+            </div>
+        </div>
 
-<section>
-    <h2>A propos de moi</h2>
-    <p>
-        Passionne par le developpement logiciel, l'architecture des systemes et 
-        l'analyse mathematique, j'aime concilier rigueur, conception et innovation. 
-        Je construis des projets solides en C++, Python et en conception numerique.
-    </p>
-</section>
+        <nav>
+            <button class="nav-link" onclick="scrollToId('projets')">Projets</button>
+            <button class="nav-link" onclick="scrollToId('competences')">Competences</button>
+            <button class="nav-link" onclick="scrollToId('parcours')">Parcours</button>
+            <button class="nav-link" onclick="scrollToId('contact')">Contact</button>
+        </nav>
 
-<section>
-    <h2>Liens utiles</h2>
-    <ul>
-        <li><a href="https://github.com/avertychristopher">Mon GitHub</a></li>
-        <li><a href="mailto:christopher.averty.1@ulaval.ca">Me contacter</a></li>
-    </ul>
-</section>
+        <!-- HERO ----------------------------------------------------------- -->
+        <div class="hero">
+            <div class="hero-main">
+                <h1 class="hero-title">Christopher J. Averty</h1>
+                <div class="hero-subtitle">
+                    Etudiant en <span>genie logiciel</span> a l'Universite Laval.  
+                    Developpeur <span>C++</span>, passionne par les systemes numeriques,
+                    l'architecture logicielle et l'analyse mathematique.
+                </div>
 
+                <div class="hero-tags">
+                    <div class="tag-pill">C++ · POO · STL</div>
+                    <div class="tag-pill">Logisim & circuits numeriques</div>
+                    <div class="tag-pill">MATLAB / Python scientifique</div>
+                    <div class="tag-pill">Git · Linux · Outils dev</div>
+                </div>
+
+                <div class="hero-actions">
+                    <a href="#projets" class="btn-primary">
+                        Voir les projets
+                    </a>
+                    <a href="#contact" class="btn-ghost">
+                        Me contacter
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- PROJETS ------------------------------------------------------------- -->
+    <section id="projets">
+        <h2 class="section-title">🧪 Projets scolaires</h2>
+        <p class="section-subtitle">
+            Selection de travaux pratiques et projets realises dans le cadre du baccalaureat
+            en genie logiciel (C++, numerique, MATLAB, circuits logiques, etc.).
+        </p>
+
+        <div class="grid-2">
+            <!-- TP3 Catalogue -->
+            <article class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">TP3 Catalogue (C++)</div>
+                        <div style="font-size:12px;color:var(--muted);">
+                            Architecture orientee objet · Exceptions · Fichiers · Polymorphisme
+                        </div>
+                    </div>
+                    <span class="card-badge">C++ · POO</span>
+                </div>
+                <div class="card-body">
+                    Application console permettant de gerer un catalogue de produits
+                    (vetements, electronique) avec validation de fichiers, gestion des erreurs
+                    via exceptions et clonage polymorphe des objets.
+                </div>
+                <div class="card-meta">
+                    <div class="pill-list">
+                        <span class="pill">Polymorphisme</span>
+                        <span class="pill">unique_ptr</span>
+                        <span class="pill">Exceptions</span>
+                    </div>
+                    <!-- Lien GitHub a adapter quand le projet sera depose -->
+                    <a href="#" style="font-size:12px;">Voir le depot</a>
+                </div>
+            </article>
+
+            <!-- Simulateur Logisim -->
+            <article class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">Simulateur/sequençeur Logisim</div>
+                        <div style="font-size:12px;color:var(--muted);">
+                            Compteurs · Flip-flops · Automates finis · Afficheurs
+                        </div>
+                    </div>
+                    <span class="card-badge">Circuits numeriques</span>
+                </div>
+                <div class="card-body">
+                    Conception de circuits synchrones (compteurs, sequenceurs, panneaux
+                    lumineux) avec tables de Karnaugh, multiplexeurs et flip-flops afin de
+                    controler des etats complexes.
+                </div>
+                <div class="card-meta">
+                    <div class="pill-list">
+                        <span class="pill">Logisim</span>
+                        <span class="pill">FSM</span>
+                        <span class="pill">Karnaugh</span>
+                    </div>
+                    <a href="#" style="font-size:12px;">Captures a venir</a>
+                </div>
+            </article>
+
+            <!-- Analyse numerique -->
+            <article class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">Analyse numerique & MATLAB</div>
+                        <div style="font-size:12px;color:var(--muted);">
+                            Differentiation, interpolation, EDO, differences finies
+                        </div>
+                    </div>
+                    <span class="card-badge">MATLAB</span>
+                </div>
+                <div class="card-body">
+                    Scripts MATLAB appliques a des problemes d'ingenierie : resolution
+                    numerique d'EDO, interpolation, ACP et methodes iteratives pour des
+                    systemes lineaires.
+                </div>
+                <div class="card-meta">
+                    <div class="pill-list">
+                        <span class="pill">MAT-2910</span>
+                        <span class="pill">EDO</span>
+                        <span class="pill">ACP</span>
+                    </div>
+                    <a href="#" style="font-size:12px;">Code a venir</a>
+                </div>
+            </article>
+
+            <!-- ACP / probabilites -->
+            <article class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">ACP, probabilites, algebra lineaire</div>
+                        <div style="font-size:12px;color:var(--muted);">
+                            Python scientifique · Numpy · Matrices · Stats
+                        </div>
+                    </div>
+                    <span class="card-badge">Python</span>
+                </div>
+                <div class="card-body">
+                    Etudes sur des donnees reelles (ex. jeu de donnees Wine) avec ACP,
+                    decomposition en valeurs propres, probabilites et simulations.
+                </div>
+                <div class="card-meta">
+                    <div class="pill-list">
+                        <span class="pill">Numpy</span>
+                        <span class="pill">ACP</span>
+                        <span class="pill">Stats</span>
+                    </div>
+                    <a href="#" style="font-size:12px;">Notebook a venir</a>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- COMPETENCES --------------------------------------------------------- -->
+    <section id="competences">
+        <h2 class="section-title">🛠 Competences techniques</h2>
+        <p class="section-subtitle">
+            Stack orientee C++ et developpement d'outils d'analyse pour l'ingenierie,
+            avec une base solide en mathematiques appliquees.
+        </p>
+
+        <div class="skills-wrap">
+            <div class="card">
+                <div class="skills-group-title">Langages & paradigmes</div>
+                <div class="skills-chips">
+                    <span class="skills-chip">C++ (POO, STL)</span>
+                    <span class="skills-chip">Python</span>
+                    <span class="skills-chip">MATLAB / Octave</span>
+                    <span class="skills-chip">C (bases)</span>
+                    <span class="skills-chip">Shell / Bash</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="skills-group-title">Outils & environnement</div>
+                <div class="skills-chips">
+                    <span class="skills-chip">Git / GitHub</span>
+                    <span class="skills-chip">Linux</span>
+                    <span class="skills-chip">NetBeans / Qt Creator</span>
+                    <span class="skills-chip">Logisim</span>
+                    <span class="skills-chip">Visual Studio Code</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="skills-group-title">Themes d'interet</div>
+                <div class="skills-chips">
+                    <span class="skills-chip">Systemes numeriques</span>
+                    <span class="skills-chip">Architecture logicielle</span>
+                    <span class="skills-chip">Analyse numerique</span>
+                    <span class="skills-chip">Probabilites & stats</span>
+                    <span class="skills-chip">Finance / investissement</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PARCOURS ------------------------------------------------------------ -->
+    <section id="parcours">
+        <h2 class="section-title">🎓 Parcours</h2>
+
+        <div class="grid-2">
+            <!-- Etudes -->
+            <div class="card">
+                <div class="skills-group-title">Formation</div>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-title">
+                            Baccalaureat en genie logiciel
+                        </div>
+                        <div class="timeline-meta">
+                            Universite Laval · 2022 – en cours
+                        </div>
+                        <div class="timeline-body">
+                            Cours marquants : structures de donnees et C++, circuits
+                            logiques numeriques, probabilites, analyse numerique pour
+                            l'ingenierie, securite informatique, etc.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Experience -->
+            <div class="card">
+                <div class="skills-group-title">Experience</div>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-title">
+                            Conseiller a la clientele (RBC)
+                        </div>
+                        <div class="timeline-meta">
+                            Banque Royale du Canada · Quebec
+                        </div>
+                        <div class="timeline-body">
+                            Experience concrete du monde bancaire, relation clients,
+                            rigueur operationnelle et interet prononce pour la finance,
+                            la gestion de patrimoine et l'investissement.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT ------------------------------------------------------------- -->
+    <section id="contact">
+        <h2 class="section-title">📬 Contact</h2>
+        <p class="section-subtitle">
+            Ouvert aux opportunites de stages, projets techniques, collaborations
+            en finance / tech et discussions sur le C++, les systemes numeriques
+            ou l'investissement.
+        </p>
+
+        <div class="contact-grid">
+            <div class="card">
+                <p class="contact-line">
+                    <strong>Email :</strong>
+                    <a href="mailto:christopher.averty.1@ulaval.ca">
+                        christopher.averty.1@ulaval.ca
+                    </a>
+                </p>
+                <p class="contact-line">
+                    <strong>GitHub :</strong>
+                    <a href="https://github.com/avertyChristopher" target="_blank">
+                        github.com/avertyChristopher
+                    </a>
+                </p>
+                <!-- A mettre a jour quand tu creereras ton LinkedIn -->
+                <p class="contact-line">
+                    <strong>LinkedIn :</strong> a venir
+                </p>
+            </div>
+
+            <div class="card">
+                <p class="contact-line">
+                    <strong>Actuellement :</strong> Etudiant en genie logiciel, Universite Laval
+                </p>
+                <p class="contact-line">
+                    <strong>Interets :</strong> C++, numerique, analyse numerique,
+                    investissement, immobilier, finance de marche.
+                </p>
+                <p class="contact-line">
+                    <strong>Objectif :</strong> Construire un profil hybride
+                    ingenierie & finance, solide techniquement et strategique.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -------------------------------------------------------------- -->
+    <footer>
+        <div>© <span id="year"></span> Christopher J. Averty</div>
+        <div>Site statique heberge sur GitHub Pages</div>
+    </footer>
+
+</div>
+
+<script>
+    // Smooth scroll vers une section
+    function scrollToId(id) {
+        const el = document.getElementById(id);
+        if (!el) return;
+        window.scrollTo({
+            top: el.offsetTop - 20,
+            behavior: "smooth"
+        });
+    }
+
+    // Annee dynamique
+    document.getElementById("year").textContent = new Date().getFullYear();
+</script>
 </body>
 </html>
